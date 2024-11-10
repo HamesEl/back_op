@@ -5,10 +5,11 @@ import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.info.License;
-import io.swagger.v3.oas.models.security.SecurityRequirement;
-import io.swagger.v3.oas.models.security.SecurityScheme;
+import io.swagger.v3.oas.models.servers.Server;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.Arrays;
 
 @Configuration
 public class OpenApiConfiguration {
@@ -25,9 +26,11 @@ public class OpenApiConfiguration {
                                 .url("https://springdoc.org")))
                 .externalDocs(new ExternalDocumentation()
                         .description("SkillSwapINC TutorMatch wiki Documentation")
-                        .url("https://github.com/SkillSwapINC/TutorMatch-Report"));
+                        .url("https://github.com/SkillSwapINC/TutorMatch-Report"))
+                .servers(Arrays.asList(
+                        new Server().url("https://glorious-upliftment-production.up.railway.app").description("Railway server")
+                ));
 
-        // Add security scheme
 
         /*final String securitySchemeName = "bearerAuth";
 
@@ -40,8 +43,6 @@ public class OpenApiConfiguration {
                                         .type(SecurityScheme.Type.HTTP)
                                         .scheme("bearer")
                                         .bearerFormat("JWT")));*/
-
-        // Return OpenAPI configuration object with all the settings
 
         return openApi;
     }
